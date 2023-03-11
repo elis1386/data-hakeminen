@@ -1,0 +1,27 @@
+<main class="container">
+  <article class="input-group mb-3">
+    <input
+      type="text"
+      class="input"
+      placeholder="Filter products"
+      [(ngModel)]="term"
+    />
+  </article>
+  <section class="d-flex gap-4 mt-4 flex-wrap">
+      <article *ngFor="let product of products | filter: term let i = index">
+        <div class="card card-box">
+          <img class="image" [src]="product.image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">
+              {{ product.category }} <span>{{ product.price }} €</span>
+            </p>
+            <button (click)="showDetails()"  class="btn" [ngClass]="{'btn-warning' : !details, 'btn-info': details}">{{details ? 'Hide' : 'Show'}} details</button>
+            <article *ngIf="details" class="mt-4">
+                <p class="desc">{{product.description}}</p>
+              </article>
+          </div>
+        </div>
+      </article>
+  </section>
+</main>
